@@ -1,0 +1,17 @@
+#errormsg{
+    font-size: smaller;
+    display: none;
+    color: red;
+}
+.childContainer{
+    background-color: rgb(241, 241, 135);
+    /* margin-left: 300px; */
+    width: 600px;
+    height: 300px;
+}
+.login:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+    
+}

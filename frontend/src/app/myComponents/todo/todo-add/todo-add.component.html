@@ -1,0 +1,42 @@
+
+
+<div class="container-fluid custromization  mt-5 p-2"  >
+    <h3 class="mb-2">Todo's </h3>
+    <!-- <form (ngSubmit)="addTodo()" class="mb-2">
+        <div class="row">
+        
+            <!-- <div class="col-6">
+                <div class="form-group">
+
+
+                    <input type="text" [(ngModel)]="title" class="form-control" id="title" aria-describedby="emailHelp"
+                        placeholder="Enter Task" name="title">
+                </div>
+            </div>
+            <div class="col-6">
+
+
+                <button type="submit" class="btn  btn-sm btn-primary">Add Todo</button>
+            </div> -->
+        <!-- </div> -->
+    <!-- </form>   -->
+     <div
+     cdkDropList
+     [cdkDropListData]="todoArr"
+     (cdkDropListDropped)="drop($event)"> 
+         <div *ngFor="let todo of todoArr;let i = index " class="p-2 TodoContent" cdkDrag>
+            <div class="row Add" *ngIf="todo !=undefined && todo != ''" >
+                <div class="col-1" (click)="change(i)">
+                    <input class="checkbox" type="checkbox">
+                </div>
+                
+                <div class="col-11 d-flex flex-row">
+                    {{todo}}
+                </div>
+            </div>
+        </div> 
+    </div> 
+    
+       <!-- <h1> {{hero.title}}</h1> -->
+
+</div>

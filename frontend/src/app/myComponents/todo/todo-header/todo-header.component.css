@@ -1,0 +1,17 @@
+.row1 {
+    background-color: rgb(188, 173, 173);
+    color: black;
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal{
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.col-2:hover {
+    cursor: pointer;
+
+}

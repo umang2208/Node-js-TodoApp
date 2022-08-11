@@ -1,0 +1,52 @@
+<div class="container">
+
+	<app-back-btn class="m-4 p-2"></app-back-btn>
+
+	<div class="container my-5 childContainer p-5">
+
+		<form [formGroup]="userDetails">
+
+			<div class="form-group  row">
+				<div class="col-3 m-1">
+					<label for="inputEmail4">Name</label>
+				</div>
+				<div class="col-8 m-1">
+					<input type="text" class="form-control" formControlName="Name" id="inputName" placeholder="Name">
+				</div>
+			</div>
+
+			<div class="form-group  row">
+				<div class="col-3 m-1">
+					<label for="Email">Email</label>
+				</div>
+				<div class="col-8 m-1">
+					<input type="email" 
+						class="form-control" formControlName="email" id="Email" placeholder="Email" name="Email">
+					<div id="errormsg"> This Email Id Is Alredy registered Try To Login Or Register With
+						Another Email Id
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group  row">
+				<div class="col-3 m-1">
+					<label for="inputPassword4">Password</label>
+				</div>
+				<div class="col-8 m-1">
+					<input type="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+					formControlName="password" id="inputPassword4" name="inputPasswords"
+						placeholder="Password">
+				</div>
+			</div>
+
+			<div class="row text-center align-self-center" >
+				<div class="col-2 mx-auto my-2">
+					<button type="submit" class="btn btn-primary" (click)="goToLogin()">Register</button>
+					<p class="login mt-1" (click)="goToLoginDirect()">Or Login</p>
+				</div>
+			</div>
+
+		</form>
+
+	</div>
+</div>

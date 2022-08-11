@@ -1,0 +1,25 @@
+<div class="container-fluid custromization  mt-5 p-2" >
+    <h3 class="mb-2">In Progress </h3>
+    <div class="drop-area"
+    cdkDropList
+    [cdkDropListData]="message"
+    (cdkDropListDropped)="drop($event)">
+    
+    <div *ngFor="let msg of message ;let i = index" class="p-2 TodoContent"  cdkDrag
+    >
+        <div *ngIf="msg != '' && msg !=undefined"  >
+            <div class="row Progress">
+                <div class="col-1" (click)="change(i)">
+                    <input class="checkbox" type="checkbox">
+                </div>
+
+                <div class="col-11 d-flex flex-row">
+                    {{msg}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+</div>
