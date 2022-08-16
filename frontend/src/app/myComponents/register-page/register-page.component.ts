@@ -31,7 +31,6 @@ export class RegisterPageComponent implements OnInit {
     this.appService.Register(this.userDetails.value).subscribe((data) => {
       result = JSON.stringify(data).split(':');
       const value = result[1].split('}');
-      this.passwordChecker();
 
       if (
         this.userDetails.value.Name == '' ||
@@ -50,25 +49,7 @@ export class RegisterPageComponent implements OnInit {
 
   goToLoginDirect() {
     this.router.navigate(['login']);
+    window.history.back();
   }
 
-  passwordChecker() {
-    const pass = this.userDetails.value.password;
-    console.log(pass?.length);
-    if (pass != undefined || pass != null) {
-      // if(pass?.length < 9){
-      // }
-      //   for(let i=0; i<pass?.length;i+=1){
-      //     if(pass[i] >= '0' && pass[i]<='9'){
-      //       this.strongPassword+=1;
-      //     }
-      //     else if(pass[i] >= 'a' && pass[i]<='z'){
-      //       this.strongPassword+=1;
-      //     }
-      //     else if(pass[i] >= 'A' && pass[i]<='Z'){
-      //       this.strongPassword+=1;
-      //     }
-      //   }
-    }
-  }
 }

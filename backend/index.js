@@ -1,9 +1,17 @@
 var express = require("express");
 var cors = require("cors");
+const sessions = require('express-session');
 
 var bodyParser = require("body-parser");
 var app = express();
 const mysql = require("mysql");
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
 
 const connect = mysql.createConnection({
   host: "localhost",
@@ -21,7 +29,7 @@ connect.connect((error) => {
 app.use(cors());
 
 
-
+var session;
 var port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
@@ -38,29 +46,16 @@ app.post("/login", (req, res) => {
   
   const user = req.body.user;
 
-  console.log("inside login route nodejs", user);
   const sqlData =
     'select * from userregister where  email = ("' + user.email + '") and password = ("' + user.password + '") ';
   connect.query(sqlData, (err, result) => {
     if (err) throw err;
     else if (result && result.length) {
+      session=req.session;
+      session.userid=req.body.username;
+      console.log(req.session);
       res.json({"statuscode":200
-                 
     });
-      // const sqlPassword =
-      //   'select password from userregister where  password = ("' +
-      //   user.password +
-      //   '")';
-      // connect.query(sqlPassword, (err, passResult) => {
-      //   if (err) throw err;
-      //   console.log((passResult), (user.password))
-      //   if (passResult == user.password) {
-      //     res.json({"statuscode":200});
-      //   } else {
-      //       res.json({"statuscode":399});
-
-      //   }
-      // });
     } else {
         res.json({"statuscode":401});
       

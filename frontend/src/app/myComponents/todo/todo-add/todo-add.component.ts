@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component,  EventEmitter,  Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataSharingService } from 'src/app/myServices/data-sharing.service';
-import {CdkDragDrop, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, transferArrayItem,moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-todo-add',
@@ -12,8 +12,10 @@ export class TodoAddComponent implements OnInit {
   title : string = "";
   title1 : string = "";
   id: string = "";
-  // todoArr: any[] = [];
-  @Input() todoArr: string[] =[]
+  todoArrForInProgress: any[] = [];
+
+  @Input() todoArr: string[] =[];
+  @Output() todoInPro: EventEmitter<any> = new EventEmitter<any>();
   
   
 
@@ -22,25 +24,21 @@ export class TodoAddComponent implements OnInit {
   constructor( private dataService : DataSharingService, private route :ActivatedRoute) { 
 
    this.id= this.route.snapshot.params['maildId'];
-  //  this.id = this.route.snapshot.params['maildId'];
-    // localStorage.clear();
-  //  for(let i=0;i<this.todoArr.length;i+=1){
-  //   console.log(this.todoArr[i]);
-  //  }
   }
 
   ngOnInit(): void {
-    // this.addTodo();
-    console.log("oninit");
-   
-    this.dataService.currentApprovalStageMessage.subscribe(msg=>this.title = msg);
-    
   }
   
   change(index:number){
-    console.log(this.id);
+   
     console.log(this.todoArr[index]);
     this.dataService.updateApprovalMessage(this.todoArr[index])
+    this.dataService.currentIndex.subscribe(index =>{
+      console.log(index);
+    })
+    
+    this.todoArrForInProgress.push(this.todoArr[index]);
+    this.todoInPro.emit(this.todoArrForInProgress);
     this.todoArr.splice(index,1);
     localStorage.setItem(this.id , JSON.stringify(this.todoArr));
 
@@ -83,4 +81,3 @@ export class TodoAddComponent implements OnInit {
   
 
 }
-

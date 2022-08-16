@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-modal',
@@ -7,22 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoModalComponent implements OnInit {
 
-  constructor() { }
-
-  title!: string;
-  desc!: string;
-  todo: string[] = [];
-  id: string = '';
-  public showModal: boolean = false;
-
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
-  addTodo() {
-    this.todo.push(this.title);
-    console.log(this.id, 'maildId');
-    // console.log(this.todo);
-    localStorage.setItem(this.id, JSON.stringify(this.todo));
+
+  logout() {
+    this.router.navigate(['login']);
   }
+
 
 }

@@ -14,6 +14,8 @@ export class BackBtnComponent implements OnInit {
     
   }
   backBtn(){
+    console.log(window.history);
+    window.history.back();
     this.back.back();
   }
 }

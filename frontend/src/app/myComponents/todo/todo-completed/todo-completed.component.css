@@ -17,4 +17,18 @@ input {
     background-color: white;
     border-right: 2px solid black;
     box-shadow: 3px;
+    overflow: scroll;
+    height: 412px;
 }
+.Add{
+    height: 50px;
+}
+
+.TodoContent:hover{
+    cursor: pointer;
+    border: 2px solid green;
+    height: 90px;
+    font-size: x-large;
+    /* scroll-behavior: smooth; */
+}
+

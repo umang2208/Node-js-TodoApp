@@ -1,81 +1,148 @@
 <div class="container  text-center mt-5 p-4">
 
 	<div class="row mb-3 row1">
-		<div class="col-10">
-			<h1>Welcome to todoApp </h1>
+		<div class="col-11">
+			<h1>Welcome To TodoApp </h1>
 		</div>
-		<div class="col-2 p-3" (click)="logout()">
-			Logout
+		<div class="col-1 p-3">
+			<app-todo-modal></app-todo-modal>
 		</div>
 	</div>
 
-	<div class="row ">
-		<div class="col">
-			<!-- Modal -->
-			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true" [ngClass]="{'show':showModal}">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content ">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-							<button type="button" class="close" (click)="showModal=false" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form (ngSubmit)="addTodo()">
+	<div class="row">
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content ">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form (ngSubmit)="addTodo()">
 
 
-								<div class="form-group row m-1">
-									<div class="col-3 flex-row">
+							<div class="form-group row m-1">
+								<div class="col-3 flex-row">
 
-										<label for="title">Title</label>
-									</div>
-									<div class="col-8 ">
-
-										<input type="text" [(ngModel)]="title" class="form-control" id="title"
-											aria-describedby="emailHelp" placeholder="Enter Task" name="title">
-									</div>
+									<label for="title">Title*</label>
 								</div>
-								<div class="form-group row m-1">
-									<div class="col-3 flex-row">
-										<label for="desc">Description</label>
-									</div>
-									<div class="col-8">
-										<input type="text" [(ngModel)]="desc" class="form-control" name="desc" id="desc"
-											placeholder="description for todo">
-									</div>
+								<div class="col-8 ">
+
+									<input type="text" [(ngModel)]="title" class="form-control" id="title"
+										aria-describedby="emailHelp" placeholder="Enter Task" name="title">
 								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal"
-										(click)="showModal=false">Close</button>
-									<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+							<div class="form-group row m-1">
+								<div class="col-3 flex-row">
+									<label for="desc">Description*</label>
 								</div>
-							</form>
-						</div>
+								<div class="col-8">
+									<input type="text" [(ngModel)]="desc" class="form-control" name="desc" id="desc"
+										placeholder="description for todo">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
-			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary" (click)="showModal=true" data-toggle="modal"
-				data-target="#exampleModalCenter">
-				+Add Todo's
-			</button>
 		</div>
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
+			+Add Todo's
+		</button>
+
 
 
 	</div>
+
 	<div class="row" cdkDropListGroup>
+		<div class="col-4">
+			<h2>Todo's</h2>
+		<div cdkDropList [cdkDropListData]="todo" (cdkDropListDropped)="drop($event)" [ngClass]="{'AddScroll': todo.length >=5}" >
+			<div class="AddTodoList" *ngFor="let AddTodo of todo;
+			let i = index" cdkDrag 
+			>
+
+				<div class="divForTodo p-3 m-2">
+					<div class="d-flex d-flex-row title ">
+							<input class="mr-2" type="checkbox" (click)="change(i)">
+						<label for="checkbox" class="title">
+							{{AddTodo.title |titlecase}}
+						</label>
+						
+						<div class="icon">
+							<fa-icon  [icon]="faTrash" (click)="DeleteConfirmation(i)"></fa-icon>
+						</div>
+					</div>
+					<div class="d-flex d-flex-row desc">
+						{{AddTodo.desc|titlecase}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-4">
+
+	
+		<h2>In Progress</h2>
+		<div cdkDropList [cdkDropListData]="todoInProgress" (cdkDropListDropped)="drop($event)"[ngClass]="{'AddScroll': todoInProgress.length>=5}" >
+			<div class="divForTodoInProgress p-3 m-2" *ngFor="let AddTodo of todoInProgress;let i = index"
+			 cdkDrag >
+
+				<div class="d-flex d-flex-row ">
+					<input class="mr-2" type="checkbox" (click)="TransferToComplete(i)">
+					<label for="checkbox" class="title">
+
+						{{AddTodo.title |titlecase}}
+					</label>
+				</div>
+				<div class="d-flex d-flex-row desc">
+					{{AddTodo.desc|titlecase}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-4">
+
+	
+		<h2>Completed</h2>
+		<div cdkDropList [cdkDropListData]="todoForComplete" (cdkDropListDropped)="drop($event)"[ngClass]="{'AddScroll': todoForComplete.length >=5}">
+			<div class="divForTodoInCompleted p-3 m-2" *ngFor="let AddTodo of todoForComplete;" 
+			cdkDrag>
+				<div class="d-flex d-flex-row ">
+					<input class="mr-2" style="pointer-events: none;" type="checkbox" checked>
+					<label for="checkbox" class="title">
+
+						{{AddTodo.title |titlecase}}
+					</label>
+				</div>
+				<div class="d-flex d-flex-row desc">
+					{{AddTodo.desc|titlecase}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</div>
+	<!-- <div class="row" cdkDropListGroup>
 		<div class="col">
-			<app-todo-add [todoArr]="todo"></app-todo-add>
+			<app-todo-add [todoArr]="todo" (todoInPro)="showList($event)" ></app-todo-add>
 		</div>
 
 		<div class="col">
-			<app-todo-in-progress></app-todo-in-progress>
+			<app-todo-in-progress [todoForInProgressChange]="todoInProgress" ></app-todo-in-progress>
 		</div>
 		<div class="col">
 			<app-todo-completed></app-todo-completed>
 		</div>
-	</div>
+	</div> -->
 </div>

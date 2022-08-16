@@ -10,6 +10,9 @@ export class DataSharingService {
 
   private approvProcessStageMsg = new BehaviorSubject('');
   currentProMsg = this.approvProcessStageMsg.asObservable();
+
+  private getIndex = new BehaviorSubject( '');
+  currentIndex = this.getIndex.asObservable();
  
   constructor() { }
   updateApprovalMessage(message: string) {
@@ -17,7 +20,14 @@ export class DataSharingService {
     this.approvalStageMessage.next(message)
     }
     ProcessApprovalMessage(message: string) {
-      console.log("inservice", message);
+      // console.log("inservice", message);
       this.approvProcessStageMsg.next(message)
+      }
+
+      PassingIndex(index:string){
+        console.log(index);
+        return index;
+        // index.toString();
+      // this.getIndex.next(index);
       }
 }

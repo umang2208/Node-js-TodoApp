@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataSharingService } from 'src/app/myServices/data-sharing.service';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-todo-in-progress',
@@ -12,6 +14,8 @@ export class TodoInProgressComponent implements OnInit {
   message: any[] = [];
   approvalText: string = '';
   id: any;
+  faTrash = faTrash;
+  @Input() todoForInProgressChange: any[] =[];
 
   constructor(
     private appService: DataSharingService,
@@ -61,6 +65,8 @@ export class TodoInProgressComponent implements OnInit {
     );
     console.log(event);
     // this.message.splice(0, 1);
+    this.appService.PassingIndex((event.currentIndex).toString());
+
 
     localStorage.setItem(this.id + 'progress', JSON.stringify(this.message));
 

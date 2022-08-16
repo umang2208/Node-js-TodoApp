@@ -1,17 +1,47 @@
 .row1 {
-    background-color: rgb(188, 173, 173);
+
     color: black;
 }
 
-.modal.show {
-    display: block;
-}
-
-.modal{
-    background-color: rgba(0, 0, 0, .5);
-}
 
 .col-2:hover {
     cursor: pointer;
+}
 
+.btn{
+    border-radius: 40px ;
+}
+.col {
+    border: 2px solid black;
+}
+.divForTodo,.divForTodoInProgress,.divForTodoInCompleted {
+    border-radius: 40px;
+    box-shadow: 5px 5px 5px gray;
+}
+.divForTodo{
+    background-color: rgb(120, 120, 215);
+    position: relative;
+}
+.divForTodoInProgress{
+    background-color: rgb(26, 186, 26);
+}
+.divForTodoInCompleted{
+    background-color: rgb(222, 127, 92);
+}
+.desc,.title {
+    white-space: nowrap;
+     overflow: hidden; 
+     text-overflow: ellipsis;
+}
+.divForTodo:hover,.divForTodoInProgress:hover,.divForTodoInCompleted:hover,input:hover{
+    cursor: pointer;
+}
+.icon{
+    position: absolute;
+    right: 30px;
+}
+.AddScroll{
+    background-color: black;
+    height: 450px;
+    overflow-y: scroll;
 }

@@ -16,6 +16,7 @@ import { BackBtnComponent } from './myComponents/back-btn/back-btn.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DragDropModule} from '@angular/cdk/drag-drop';
 import { TodoModalComponent } from './myComponents/todo/todo-modal/todo-modal.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -41,7 +42,8 @@ import { TodoModalComponent } from './myComponents/todo/todo-modal/todo-modal.co
     FormsModule,
     ReactiveFormsModule,
     DragDropModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FontAwesomeModule
   ],
 
   providers: [],

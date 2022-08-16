@@ -1,5 +1,5 @@
-<div class="container-fluid custromization  mt-5 p-2">
-    <h3 class="mb-2">Completed </h3>
+<h3 class="m-2">Completed </h3>
+<div class="container-fluid custromization  mt-1 p-2">
     <div class="drop-area" cdkDropList [cdkDropListData]="message" (cdkDropListDropped)="drop($event)">
         <div *ngFor="let msg of message | paginate:{
         itemsPerPage:+pageSize,
@@ -7,12 +7,12 @@
         
     };" class="p-2 TodoContent ">
             <div *ngIf="msg != ''">
-                <div class="row">
+                <div class="row Add">
                     <div class="col-1">
                         <input type="checkbox" checked>
                     </div>
-                    <div class="col-11 d-flex flex-row">
-                        {{msg}}
+                    <div class="col-10 d-flex flex-row">
+                        {{msg.title}}
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
     </div>
     <div class="row ">
         <div class="col-9 ">
-            <pagination-controls previousLabel="prev" nextLabel="NEXT" (pageChange)="onPageChange($event)">
+            <pagination-controls class="pagination" previousLabel="prev" nextLabel="NEXT" (pageChange)="onPageChange($event)">
             </pagination-controls>
         </div>
         <div class="col-1">

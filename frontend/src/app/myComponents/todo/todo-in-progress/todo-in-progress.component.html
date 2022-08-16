@@ -1,25 +1,28 @@
-<div class="container-fluid custromization  mt-5 p-2" >
-    <h3 class="mb-2">In Progress </h3>
-    <div class="drop-area"
-    cdkDropList
-    [cdkDropListData]="message"
-    (cdkDropListDropped)="drop($event)">
-    
-    <div *ngFor="let msg of message ;let i = index" class="p-2 TodoContent"  cdkDrag
-    >
-        <div *ngIf="msg != '' && msg !=undefined"  >
-            <div class="row Progress">
-                <div class="col-1" (click)="change(i)">
-                    <input class="checkbox" type="checkbox">
-                </div>
+<!-- Button trigger modal -->
+<button type="button" class=" d-flex rounded-pill text-center  btn btn-sm btn-primary" data-toggle="modal"
+    data-target="#EditModal">
+   <fa-icon [icon]="faTrash"></fa-icon>
+</button>
 
-                <div class="col-11 d-flex flex-row">
-                    {{msg}}
-                </div>
+<!-- Modal -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Deletion Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
             </div>
         </div>
     </div>
-
-
-    </div>
 </div>
+<!-- Button trigger modal -->
